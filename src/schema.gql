@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Profile {
+  description: String!
+  github: String
+  id: ID!
+  linkedin: String
+  name: String!
+}
+
+type Query {
+  """Профиль владельца визитки"""
+  profile: Profile!
+}

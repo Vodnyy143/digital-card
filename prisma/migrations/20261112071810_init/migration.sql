@@ -25,7 +25,7 @@ CREATE TABLE "Experience" (
     "position" TEXT NOT NULL,
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3),
-    "achievments" TEXT[],
+    "achievements" TEXT[],
     "profileId" TEXT NOT NULL,
 
     CONSTRAINT "Experience_pkey" PRIMARY KEY ("id")
