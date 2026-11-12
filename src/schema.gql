@@ -2,13 +2,40 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Experience {
+  achievements: [String!]!
+  company: String!
+
+  """null означает по настоящее время"""
+  endDate: DateTime
+  id: ID!
+  position: String!
+  startDate: DateTime!
+}
+
 type Profile {
   description: String!
+  experience: [Experience!]!
   github: String
   id: ID!
   linkedin: String
   name: String!
+  projects: [Project!]!
   skills: [Skill!]!
+}
+
+type Project {
+  description: String
+  id: ID!
+  name: String!
+
+  """null если код закрыт"""
+  url: String
 }
 
 type Query {
