@@ -8,6 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'node:path';
 import { ProfileModule } from '@modules/profile/profile.module';
+import { SkillsModule } from '@modules/skills/skills.module';
 
 type ApolloPlugin = NonNullable<ApolloDriverConfig['plugins']>[number];
 
@@ -32,6 +33,7 @@ const sandboxPlugin = ApolloServerPluginLandingPageLocalDefault({
       plugins: [sandboxPlugin],
     }),
     ProfileModule,
+    SkillsModule,
   ],
 })
 export class AppModule {}

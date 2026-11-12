@@ -8,9 +8,15 @@ type Profile {
   id: ID!
   linkedin: String
   name: String!
+  skills: [Skill!]!
 }
 
 type Query {
   """Профиль владельца визитки"""
   profile: Profile!
+}
+
+type Skill {
+  id: ID!
+  name: String!
 }
