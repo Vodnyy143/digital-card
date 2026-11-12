@@ -1,0 +1,23 @@
+packages:
+  - "."
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@prisma/engines'
+  - '@scarf/scarf'
+  - 'argon2'
+  - 'prisma'
+allowBuilds:
+  '@prisma/engines': true
+  '@swc/core': true
+  prisma: true
+  '@nestjs/core': true
+  '@scarf/scarf': true
+  unrs-resolver: true
+  argon2: true
+
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - '@typescript-eslint/*'
+  - 'baseline-browser-mapping'
+  - 'electron-to-chromium'
+  - 'node-releases'

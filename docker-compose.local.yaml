@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:18.1-alpine
+    container_name: card-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-card}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-card}
+      POSTGRES_DB: ${DB_NAME:-card}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - db_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-card}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: card-app
+    restart: unless-stopped
+    env_file:
+      - .env.local
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-englab}:${DB_PASSWORD:-englab}@db:5432/${DB_NAME:-englab}
+    ports:
+      - "${PORT:-5000}:5000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/src/generated
+    depends_on:
+      db:
+        condition: service_healthy
+    command: sh -c "pnpm prisma generate && pnpm prisma migrate deploy && pnpm run start:dev"
+
+volumes:
+  db_data:
