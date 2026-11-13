@@ -21,3 +21,4 @@ minimumReleaseAgeExclude:
   - 'baseline-browser-mapping'
   - 'electron-to-chromium'
   - 'node-releases'
+  - '@babel/*'

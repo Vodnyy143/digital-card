@@ -21,7 +21,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
     pnpm install --frozen-lockfile --prod
 COPY prisma ./prisma
-COPY prisma.config.ts ./
+COPY prisma7.config.ts ./
 RUN pnpm prisma generate
 
 FROM node:${NODE_VERSION} AS runner
@@ -31,7 +31,7 @@ RUN addgroup -S nestjs && adduser -S nestjs -G nestjs
 
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=prod-deps /app/prisma ./prisma
-COPY --from=prod-deps /app/prisma.config.ts ./prisma.config.ts
+COPY --from=prod-deps /app/prisma7.config.ts ./prisma7.config.ts
 COPY --from=build /app/dist ./dist
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x ./docker-entrypoint.sh && chown -R nestjs:nestjs /app
